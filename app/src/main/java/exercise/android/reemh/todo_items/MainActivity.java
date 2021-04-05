@@ -42,9 +42,9 @@ SPECS:
 - the "TodoItems" list is shown in the screen
   * every operation that creates/edits/deletes a TodoItem should immediately be shown in the UI
   * the order of the TodoItems in the UI is:
-    - all DONE items are shown first. items are sorted by creation time,
+    - all IN-PROGRESS items are shown first. items are sorted by creation time,
       where the last-created item is the first item in the list
-    - all IN-PROGRESS items are shown afterwards, no particular sort is needed (decide what's the best UX when sorting them)
+    - all DONE items are shown afterwards, no particular sort is needed (but try to think about what's the best UX for the user)
   * every item shows a checkbox and a description. you can decide to show other data as well (creation time, etc)
   * DONE items should show the checkbox as checked, and the description with a strike-through text
   * IN-PROGRESS items should show the checkbox as not checked, and the description text normal
