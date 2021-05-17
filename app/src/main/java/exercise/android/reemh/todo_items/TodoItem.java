@@ -2,7 +2,7 @@ package exercise.android.reemh.todo_items;
 
 import java.io.Serializable;
 
-public class TodoItem implements Serializable {
+public class TodoItem implements Serializable, Comparable<TodoItem> {
     private final String data;
     private final String timeCreated;
     private boolean isInProgress;
@@ -34,4 +34,16 @@ public class TodoItem implements Serializable {
       this.isInProgress = !this.isInProgress;
   }
 
+    @Override
+    public int compareTo(TodoItem otherItem) {
+        if (this.getIsInProgress() == otherItem.getIsInProgress())
+        {
+            return this.getTimeCreated().compareTo(otherItem.getTimeCreated());
+        }
+        if (!this.getIsInProgress())
+        {
+            return 1;
+        }
+        return -1;
+    }
 }

@@ -1,38 +1,63 @@
 package exercise.android.reemh.todo_items;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Arrays;
 import java.sql.Timestamp;
 
 // TODO: implement!
 public class TodoItemsHolderImpl implements TodoItemsHolder {
-  
+
+  List<TodoItem> items;
+
+  public TodoItemsHolderImpl()
+  {
+    this.items = new ArrayList<>();
+  }
 
   @Override
-  public List<TodoItem> getCurrentItems() { return null; }
+  public List<TodoItem> getCurrentItems() { return this.items; }
 
   @Override
   public void addNewInProgressItem(String description) {
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
     TodoItem newInProgressItem = new TodoItem(description, timestamp.toString(), true);
+    this.items.add(newInProgressItem);
+    Collections.sort(this.items);
 
   }
 
   @Override
   public void markItemDone(TodoItem item) {
-    if (item.getIsInProgress())
+    for (TodoItem todoItem: this.items)
     {
-      item.changeProgress();
+      if (item.getTimeCreated().equals(todoItem.getTimeCreated()) && item.getIsInProgress())
+      {
+        todoItem.changeProgress();
+      }
     }
+    Collections.sort(this.items);
+
   }
 
   @Override
   public void markItemInProgress(TodoItem item) {
-    if (!item.getIsInProgress())
+    for (TodoItem todoItem: this.items)
     {
-      item.changeProgress();
+      if (item.getTimeCreated().equals(todoItem.getTimeCreated()) && !item.getIsInProgress())
+      {
+        todoItem.changeProgress();
+      }
     }
+    Collections.sort(this.items);
+
   }
 
   @Override
-  public void deleteItem(TodoItem item) { }
+  public void deleteItem(TodoItem item) {
+    items.remove(item);
+    Collections.sort(this.items);
+  }
+
 }
