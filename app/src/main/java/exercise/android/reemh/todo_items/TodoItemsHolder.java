@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 
-// TODO: feel free to add/change/remove methods as you want
 public interface TodoItemsHolder extends Serializable {
 
   /** Get a copy of the current items list */

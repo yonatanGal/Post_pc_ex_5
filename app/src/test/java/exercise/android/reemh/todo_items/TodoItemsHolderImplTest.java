@@ -160,7 +160,7 @@ public class TodoItemsHolderImplTest extends TestCase {
   }
 
   @Test
-  public void test_when_creatingAnItem_then_timeCreatedIsRIght(){
+  public void test_when_creatingAnItem_then_timeCreatedIsRight(){
     TodoItemsHolderImpl holderUnderTest = new TodoItemsHolderImpl();
     holderUnderTest.addNewInProgressItem("drink water");
     String curTimestamp = new Timestamp(System.currentTimeMillis()).toString().split(" ")[0];
