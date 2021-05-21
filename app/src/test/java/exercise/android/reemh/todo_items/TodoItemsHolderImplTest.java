@@ -66,7 +66,7 @@ public class TodoItemsHolderImplTest extends TestCase {
   }
 
   @Test
-  public void test_when_DeletingItem_then_callingListShouldntHaveThisItem(){
+  public void test_when_DeletingAnItem_then_ListShouldntHaveThisItem(){
     // setup
     TodoItemsHolderImpl holderUnderTest = new TodoItemsHolderImpl();
     holderUnderTest.addNewInProgressItem("do shopping");
@@ -77,7 +77,7 @@ public class TodoItemsHolderImplTest extends TestCase {
   }
 
   @Test
-  public void test_when_addingSeveralItems_then_toDoItemsListShouldHaveTheseItems(){
+  public void test_when_addingFewItems_then_toDoItemsListSizeShouldBeOk(){
     // setup
     TodoItemsHolderImpl holderUnderTest = new TodoItemsHolderImpl();
     holderUnderTest.addNewInProgressItem("drink water");
