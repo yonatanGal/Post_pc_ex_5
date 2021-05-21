@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Arrays;
 import java.sql.Timestamp;
 
-// TODO: implement!
 public class TodoItemsHolderImpl implements TodoItemsHolder {
 
   List<TodoItem> items;
@@ -17,7 +16,11 @@ public class TodoItemsHolderImpl implements TodoItemsHolder {
   }
 
   @Override
-  public List<TodoItem> getCurrentItems() { return this.items; }
+  public List<TodoItem> getCurrentItems()
+  {
+    Collections.sort(this.items);
+    return this.items;
+  }
 
   @Override
   public void addNewInProgressItem(String description) {
@@ -58,6 +61,12 @@ public class TodoItemsHolderImpl implements TodoItemsHolder {
   public void deleteItem(TodoItem item) {
     items.remove(item);
     Collections.sort(this.items);
+  }
+
+  @Override
+  public void clearList()
+  {
+    this.items.clear();
   }
 
 }

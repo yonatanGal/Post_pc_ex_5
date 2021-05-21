@@ -6,35 +6,70 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
-  public TodoItemsHolder holder = null;
+  public TodoItemsHolder holder;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    if (holder == null) {
-      holder = new TodoItemsHolderImpl();
-    }
-
     FloatingActionButton addToDoItemButton = findViewById(R.id.buttonCreateTodoItem);
     RecyclerView recycler = findViewById(R.id.recyclerTodoItemsList);
     EditText editText = findViewById(R.id.editTextInsertTask);
+    InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+
+    if (savedInstanceState == null)
+    {
+      if (holder == null) {
+        holder = new TodoItemsHolderImpl();
+      }
+    }
+    else
+    {
+      holder = (TodoItemsHolder) savedInstanceState.getSerializable("holder");
+      editText.setText(savedInstanceState.getString("currentData"));
+    }
 
 
+    ToDoListAdapter adapter = new ToDoListAdapter(holder);
+    recycler.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+    recycler.setAdapter(adapter);
 
-    // TODO: implement the specs as defined below
-    //    (find all UI components, hook them up, connect everything you need)
+    addToDoItemButton.setOnClickListener(v ->
+    {
+      String toDoTaskString = String.valueOf(editText.getText());
+      if (toDoTaskString.equals("")) return;
+
+      holder.addNewInProgressItem(toDoTaskString);
+      editText.setText("");
+      adapter.notifyDataSetChanged();
+      imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+
+    });
   }
+
+  @Override
+  public void onSaveInstanceState(@NonNull Bundle outState) {
+    System.out.println("saving instance!!");
+    super.onSaveInstanceState(outState);
+    outState.putSerializable("holder", this.holder);
+    EditText editText = findViewById(R.id.editTextInsertTask);
+    outState.putSerializable("currentData", editText.getText().toString());
+
+  }
+
+
 }
 
 /*
