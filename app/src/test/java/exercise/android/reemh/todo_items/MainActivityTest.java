@@ -16,6 +16,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import static org.mockito.ArgumentMatchers.eq;
@@ -101,7 +102,7 @@ public class MainActivityTest extends TestCase {
     ArrayList<TodoItem> itemsReturnedByHolder = new ArrayList<>();
     Mockito.when(mockHolder.getCurrentItems())
       .thenReturn(itemsReturnedByHolder);
-    TodoItem itemInProgress = new TodoItem();
+    TodoItem itemInProgress = new TodoItem("do homework", new Timestamp(System.currentTimeMillis()).toString(), true);
     // TODO: customize `itemInProgress` to have type IN-PROGRESS and description "do homework"
     itemsReturnedByHolder.add(itemInProgress);
 
@@ -133,7 +134,7 @@ public class MainActivityTest extends TestCase {
     ArrayList<TodoItem> itemsReturnedByHolder = new ArrayList<>();
     Mockito.when(mockHolder.getCurrentItems())
       .thenReturn(itemsReturnedByHolder);
-    TodoItem itemDone = new TodoItem();
+    TodoItem itemDone = new TodoItem("buy tomatoes", new Timestamp(System.currentTimeMillis()).toString(), false);
     // TODO: customize `itemDone` to have type DONE and description "buy tomatoes"
     itemsReturnedByHolder.add(itemDone);
 
