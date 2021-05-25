@@ -17,7 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
-  public TodoItemsHolder holder;
+  public TodoItemsHolder holder = null;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     if (savedInstanceState == null)
     {
       if (holder == null) {
-        holder = new TodoItemsHolderImpl();
+        holder = ToDoListApp.getInstance().getItemsHolder();
       }
     }
     else
