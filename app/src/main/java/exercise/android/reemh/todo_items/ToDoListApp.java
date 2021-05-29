@@ -2,7 +2,9 @@ package exercise.android.reemh.todo_items;
 
 import android.app.Application;
 
-public class ToDoListApp extends Application {
+import java.io.Serializable;
+
+public class ToDoListApp extends Application implements Serializable {
 
     private TodoItemsHolderImpl itemsHolder;
 
@@ -11,7 +13,6 @@ public class ToDoListApp extends Application {
         return this.itemsHolder;
     }
 
-    //todo: implement livedata thing here
 
     @Override
     public void onCreate() {

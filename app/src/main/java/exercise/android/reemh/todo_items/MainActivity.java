@@ -2,6 +2,7 @@ package exercise.android.reemh.todo_items;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,9 +16,11 @@ import android.widget.EditText;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
-  public TodoItemsHolder holder = null;
+  public TodoItemsHolderImpl holder = null;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +40,14 @@ public class MainActivity extends AppCompatActivity {
     }
     else
     {
-      holder = (TodoItemsHolder) savedInstanceState.getSerializable("holder");
+      holder = (TodoItemsHolderImpl) savedInstanceState.getSerializable("holder");
       editText.setText(savedInstanceState.getString("currentData"));
     }
 
+    holder.toDoItemsLiveDataPublic.observe(this, new Observer<List<TodoItem>>() {
+      @Override
+      public void onChanged(List<TodoItem> todoItems) { }
+    });
 
     ToDoListAdapter adapter = new ToDoListAdapter(holder);
     recycler.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
@@ -61,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
 
   @Override
   public void onSaveInstanceState(@NonNull Bundle outState) {
-    System.out.println("saving instance!!");
     super.onSaveInstanceState(outState);
     outState.putSerializable("holder", this.holder);
     EditText editText = findViewById(R.id.editTextInsertTask);

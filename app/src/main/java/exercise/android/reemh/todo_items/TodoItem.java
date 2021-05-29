@@ -2,6 +2,7 @@ package exercise.android.reemh.todo_items;
 
 import java.io.Serializable;
 
+
 public class TodoItem implements Serializable, Comparable<TodoItem> {
     private String timeModified;
     private String id;
@@ -9,11 +10,12 @@ public class TodoItem implements Serializable, Comparable<TodoItem> {
     private final String timeCreated;
     private boolean isInProgress;
 
-    public TodoItem(String data, String timeCreated, boolean isInProgress)
+    public TodoItem(String id, String data, String timeCreated, String timeModified, boolean isInProgress)
   {
+      this.id = id;
       this.data = data;
       this.timeCreated = timeCreated;
-      this.timeModified = timeCreated;
+      this.timeModified = timeModified;
       this.isInProgress = isInProgress;
   }
 
@@ -21,10 +23,12 @@ public class TodoItem implements Serializable, Comparable<TodoItem> {
         return this.id;
     }
 
-    public String itemToString()
+    public String toString()
     {
-        //todo: implement me
-        return "";
+        String separator = "#/#";
+        String stringIsInProgress = String.valueOf(getIsInProgress());
+        return this.id + separator + this.timeModified + separator + this.timeCreated + separator
+                + stringIsInProgress + separator + this.data;
     }
 
     public String getData()
@@ -60,3 +64,5 @@ public class TodoItem implements Serializable, Comparable<TodoItem> {
         return -1;
     }
 }
+
+
