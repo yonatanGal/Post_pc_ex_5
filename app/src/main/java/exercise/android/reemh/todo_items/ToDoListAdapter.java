@@ -1,5 +1,6 @@
 package exercise.android.reemh.todo_items;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,6 +79,13 @@ public class ToDoListAdapter extends RecyclerView.Adapter<TodoListViewHolder>
         {
             this.holder.deleteItem(item);
             notifyDataSetChanged();
+        });
+
+        viewHolder.data.setOnClickListener(v ->
+        {
+            Intent editIntent = new Intent(v.getContext(), EditItemActivity.class);
+            editIntent.putExtra("item", item.toString());
+            v.getContext().startActivity(editIntent);
         });
 
 

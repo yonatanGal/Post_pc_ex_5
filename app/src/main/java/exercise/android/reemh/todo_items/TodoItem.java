@@ -51,6 +51,16 @@ public class TodoItem implements Serializable, Comparable<TodoItem> {
       this.isInProgress = !this.isInProgress;
   }
 
+    public String getTimeModified()
+    {
+        return this.timeModified;
+    }
+
+    public void editTimeModified(String timeModified)
+    {
+        //TOdo: implement
+    }
+
     @Override
     public int compareTo(TodoItem otherItem) {
         if (this.getIsInProgress() == otherItem.getIsInProgress())
