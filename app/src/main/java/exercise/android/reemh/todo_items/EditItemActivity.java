@@ -79,7 +79,7 @@ public class EditItemActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String newData = data.getText().toString();
+                String newData = s.toString();
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                 String newModifiedTime = getTimeModifiedForUI(timestamp.toString());
                 timeModified.setText("Time Modified: " + newModifiedTime);
