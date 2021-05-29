@@ -6,7 +6,7 @@ import java.io.Serializable;
 public class TodoItem implements Serializable, Comparable<TodoItem> {
     private String timeModified;
     private String id;
-    private final String data;
+    private String data;
     private final String timeCreated;
     private boolean isInProgress;
 
@@ -58,7 +58,15 @@ public class TodoItem implements Serializable, Comparable<TodoItem> {
 
     public void editTimeModified(String timeModified)
     {
-        //TOdo: implement
+        this.timeModified = timeModified;
+    }
+
+    public void editData(String newData)
+    {
+        if (!newData.equals(""))
+        {
+            this.data = newData;
+        }
     }
 
     @Override

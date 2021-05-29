@@ -2,6 +2,7 @@ package exercise.android.reemh.todo_items;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.icu.text.UnicodeSetSpanner;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -103,6 +104,36 @@ public class TodoItemsHolderImpl implements TodoItemsHolder {
     for (TodoItem todoItem : this.items) {
       if (item.getId().equals(todoItem.getId()) && !item.getIsInProgress()) {
         todoItem.changeProgress();
+        toDoItemsLiveDataMutable.setValue(new ArrayList<>(this.items));
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(todoItem.getId(), todoItem.toString());
+        editor.apply();
+      }
+    }
+    Collections.sort(this.items);
+  }
+
+  @Override
+  public void changeItemModifiedTime(TodoItem item, String modifiedTime)
+  {
+    for (TodoItem todoItem : this.items) {
+      if (item.getId().equals(todoItem.getId()) && !item.getIsInProgress()) {
+        todoItem.editTimeModified(modifiedTime);
+        toDoItemsLiveDataMutable.setValue(new ArrayList<>(this.items));
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(todoItem.getId(), todoItem.toString());
+        editor.apply();
+      }
+    }
+    Collections.sort(this.items);
+  }
+
+  @Override
+  public void changeItemData(TodoItem item, String newData)
+  {
+    for (TodoItem todoItem : this.items) {
+      if (item.getId().equals(todoItem.getId()) && !item.getIsInProgress()) {
+        todoItem.editData(newData);
         toDoItemsLiveDataMutable.setValue(new ArrayList<>(this.items));
         SharedPreferences.Editor editor = sp.edit();
         editor.putString(todoItem.getId(), todoItem.toString());
